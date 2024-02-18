@@ -7,6 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// all routes
+const productRoute = require("./routes/product.route");
+
+app.use("/products", productRoute);
+
 app.get("/", (req, res, next) => {
   res
     .status(200)
