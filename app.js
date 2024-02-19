@@ -9,10 +9,14 @@ app.use(express.json());
 
 // all routes
 const productRoute = require("./routes/product.route");
-const registerRoute = require("./routes/register.route");
+const userRegisterRoute = require("./routes/userRegister.route");
+const adminRegisterRoute = require("./routes/adminRegistration");
+const adminLoginRoute = require("./routes/adminLogin.route");
 
 app.use("/api/v1/products", productRoute);
-app.use("/api/v1/auth/register", registerRoute);
+app.use("/api/v1/user/auth/register", userRegisterRoute);
+app.use("/api/v1/admin/auth/register", adminRegisterRoute);
+app.use("/api/v1/admin/auth/login", adminLoginRoute);
 
 app.get("/", (req, res, next) => {
   res

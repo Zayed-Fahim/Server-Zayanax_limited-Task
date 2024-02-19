@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const { createJSONWebToken } = require("../hooks/jsonWebToken");
-const { postUserService } = require("../services/register.service");
+const { postUserService } = require("../services/userRegister.service");
 
 exports.postUser = async (req, res, next) => {
   try {
@@ -44,11 +44,11 @@ exports.postUser = async (req, res, next) => {
 
 exports.verifyUser = async (req, res) => {
   try {
-    const user = await User.findOne({ phone: req.user.phone });
+    const user = await User.findOne({ phone: req?.user?.phone });
 
     const newUserData = {
-      phone: user.phone,
-      role: user.role,
+      phone: user?.phone,
+      role: user?.role,
     };
     res.status(200).json({
       status: "Success",
