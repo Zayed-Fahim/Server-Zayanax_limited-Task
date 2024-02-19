@@ -7,6 +7,10 @@ const productSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    productImage: {
+      type: String,
+      required: true,
+    },
     productPriceBeforeDiscount: {
       type: Number,
       required: true,
@@ -26,7 +30,7 @@ const productSchema = new mongoose.Schema(
       type: String,
     },
     status: {
-      type: String,
+      type: Boolean,
       required: true,
     },
   },
