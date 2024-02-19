@@ -9,3 +9,21 @@ exports.getProductsService = async () => {
   const products = await Product.find({});
   return products;
 };
+
+exports.getSearchedProductsService = async (searchInput) => {
+  const searchTerm = searchInput.toLowerCase();
+  const partiallyMatched = await Product.find(
+    {
+      $text: { $search: searchTerm, $caseSensitive: false },
+      status: true,
+    },
+    { score: { $meta: "textScore" } }
+  )
+    .limit(2)
+    .sort({ score: { $meta: "textScore" } });
+  if (partiallyMatched.length > 0) {
+    return partiallyMatched;
+  }
+  const exactMatch = await Product.find({ name: searchTerm, status: true });
+  return exactMatch || [];
+};
