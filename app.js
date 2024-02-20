@@ -12,8 +12,10 @@ const productRoute = require("./routes/product.route");
 const userRegisterRoute = require("./routes/userRegister.route");
 const adminRegisterRoute = require("./routes/adminRegistration");
 const adminLoginRoute = require("./routes/adminLogin.route");
+const promoCodeRoute = require("./routes/promoCode.route");
 
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/promo-code", promoCodeRoute);
 app.use("/api/v1/user/auth/register", userRegisterRoute);
 app.use("/api/v1/admin/auth/register", adminRegisterRoute);
 app.use("/api/v1/admin/auth/login", adminLoginRoute);
