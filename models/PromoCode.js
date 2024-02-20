@@ -23,6 +23,9 @@ const promoCodeSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    usageCount: {
+      type: Number,
+    },
     status: {
       type: Boolean,
       required: true,
