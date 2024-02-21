@@ -3,6 +3,7 @@ const {
   postPromoCodeService,
   getPromoCodesService,
   getPromoCodeService,
+  updatePromoCodeService,
 } = require("../services/promoCode.service");
 
 exports.postPromoCode = async (req, res, next) => {
@@ -75,5 +76,27 @@ exports.getPromoCode = async (req, res, next) => {
       .status(500)
       .json({ status: "Failed", message: "Internal server error!" });
     next(error);
+  }
+};
+
+exports.updatePromoCode = async (req, res, next) => {
+  try {
+    const result = await updatePromoCodeService(
+      req.params.promoCodeId,
+      req.body
+    );
+    if (!result) {
+      return res
+        .status(404)
+        .json({ status: "Failed", message: "Promo Code not found" });
+    }
+    res
+      .status(200)
+      .json({ status: "Success", message: "Promo Code updated successfully" });
+  } catch (error) {
+    next(error);
+    res
+      .status(500)
+      .json({ status: "Failed", message: "Internal Server Error" });
   }
 };
