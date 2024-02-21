@@ -33,6 +33,7 @@ exports.updateOrderToConfirmService = async (orderId) => {
   );
   return updateOrder;
 };
+
 exports.updateOrderToCancelService = async (orderId) => {
   const updateOrder = await Order.findByIdAndUpdate(
     orderId,

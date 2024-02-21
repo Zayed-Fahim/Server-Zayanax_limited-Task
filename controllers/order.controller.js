@@ -1,4 +1,3 @@
-const Order = require("../models/Order");
 const {
   postOrderService,
   getOrdersService,
@@ -48,7 +47,9 @@ exports.updateOrderToConfirm = async (req, res, next) => {
     const updatedOrder = await updateOrderToConfirmService(orderId);
 
     if (!updatedOrder) {
-      return res.status(404).json({ message: "Order not found" });
+      return res
+        .status(404)
+        .json({ status: "Failed", message: "Order not found" });
     }
     res
       .status(200)

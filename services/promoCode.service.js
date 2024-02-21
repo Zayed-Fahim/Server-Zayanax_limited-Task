@@ -1,4 +1,5 @@
 const PromoCode = require("../models/PromoCode");
+const { Types } = require("mongoose");
 
 exports.postPromoCodeService = async (data) => {
   const promoCode = await PromoCode.create(data);
@@ -37,4 +38,19 @@ exports.getPromoCodeService = async (data) => {
     throw new Error("Failed to update promo code");
   }
   return updatedPromoCode;
+};
+
+exports.updatePromoCodeService = async (promoCodeId, data) => {
+  try {
+    const promoCode = await PromoCode.findByIdAndUpdate(promoCodeId, data, {
+      new: true,
+    });
+    if (!promoCode) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
