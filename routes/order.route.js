@@ -4,12 +4,10 @@ const router = express.Router();
 const {
   postOrder,
   getOrders,
-  updateOrderToConfirm,
-  updateOrderToCancel,
+  updateOrderStatus,
 } = require("../controllers/order.controller");
 
+router.route("/:orderId").patch(updateOrderStatus);
 router.route("/").post(postOrder).get(getOrders);
-router.route("/confirm-order/:orderId").patch(updateOrderToConfirm);
-router.route("/cancel-order/:orderId").patch(updateOrderToCancel);
 
 module.exports = router;

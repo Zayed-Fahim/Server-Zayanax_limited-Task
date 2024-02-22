@@ -19,26 +19,19 @@ exports.postOrderService = async (data) => {
 
 exports.getOrdersService = async (data) => {
   if (!data || data === "all") {
-    return await Order.find({});
+    const orders = await Order.find({});
+    return orders;
   } else if (data) {
-    return await Order.find({ status: data });
+    const orders = await Order.find({ status: data });
+    return orders;
   }
 };
 
-exports.updateOrderToConfirmService = async (orderId) => {
+exports.updateOrderStatusService = async (orderId, data) => {
   const updateOrder = await Order.findByIdAndUpdate(
     orderId,
-    { status: "confirm" },
+    { status: data?.status },
     { new: true }
   );
-  return updateOrder;
-};
-
-exports.updateOrderToCancelService = async (orderId) => {
-  const updateOrder = await Order.findByIdAndUpdate(
-    orderId,
-    { status: "cancel" },
-    { new: true }
-  );
-  return updateOrder;
+  return true;
 };
