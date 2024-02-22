@@ -27,3 +27,18 @@ exports.getSearchedProductsService = async (searchInput) => {
   const exactMatch = await Product.find({ name: searchTerm, status: true });
   return exactMatch || [];
 };
+
+exports.updateProductService = async (productId, data) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(productId, data, {
+      new: true,
+    });
+    if (!updatedProduct) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

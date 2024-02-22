@@ -2,6 +2,7 @@ const {
   postProductService,
   getProductsService,
   getSearchedProductsService,
+  updateProductService,
 } = require("../services/product.service");
 
 exports.postProduct = async (req, res, next) => {
@@ -46,5 +47,24 @@ exports.getSearchedProducts = async (req, res, next) => {
       .status(500)
       .json({ status: "Failed", message: "Internal server error!" });
     next(error);
+  }
+};
+
+exports.updateProduct = async (req, res, next) => {
+  try {
+    const result = await updateProductService(req.params.productId, req.body);
+    if (!result) {
+      return res
+        .status(404)
+        .json({ status: "Failed", message: "Product not found" });
+    }
+    res
+      .status(200)
+      .json({ status: "Success", message: "Product updated successfully" });
+  } catch (error) {
+    next(error);
+    res
+      .status(500)
+      .json({ status: "Failed", message: "Internal Server Error" });
   }
 };
