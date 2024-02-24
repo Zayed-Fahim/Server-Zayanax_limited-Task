@@ -21,7 +21,16 @@ exports.getOrdersService = async (data) => {
   if (!data || data === "all") {
     const orders = await Order.find({});
     return orders;
-  } else if (data) {
+  }
+  if (data && data === "pending") {
+    const orders = await Order.find({ status: "" });
+    return orders;
+  }
+  if (data && data === "confirm") {
+    const orders = await Order.find({ status: data });
+    return orders;
+  }
+  if (data && data === "canceled") {
     const orders = await Order.find({ status: data });
     return orders;
   }

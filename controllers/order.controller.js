@@ -20,16 +20,16 @@ exports.getOrders = async (req, res, next) => {
   const { status } = req.query;
   try {
     const orders = await getOrdersService(status);
-    if (orders?.length > 0) {
-      return res.status(200).json({
-        status: "Success",
-        message: "All Orders data are here!",
+    if (orders?.length <= 0) {
+      return res.status(404).json({
+        status: "Not Found",
+        message: "No Orders found!",
         payload: orders,
       });
     }
-    res.status(404).json({
-      status: "Not Found",
-      message: "No Orders found!",
+    res.status(200).json({
+      status: "Success",
+      message: "All Orders data are here!",
       payload: orders,
     });
   } catch (error) {
