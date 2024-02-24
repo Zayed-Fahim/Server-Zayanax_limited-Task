@@ -45,7 +45,7 @@ exports.getPromoCode = async (req, res, next) => {
       });
     }
     const isAvailable = await PromoCode.exists({
-      $and: [{ promoCode }, { userTime: { $ne: 0 } }],
+      $and: [{ promoCode }, { useTime: { $ne: 0 } }],
     });
     if (!isAvailable) {
       return res.status(410).json({

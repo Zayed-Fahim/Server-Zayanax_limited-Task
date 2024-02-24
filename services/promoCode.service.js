@@ -17,7 +17,7 @@ exports.getPromoCodeService = async (data) => {
   const currentDate = new Date();
   const endDate = new Date(promoCodeData.endDate);
 
-  if (endDate < currentDate) {
+  if (endDate > currentDate) {
     await PromoCode.findOneAndUpdate(
       { promoCode },
       { $set: { status: false } },
